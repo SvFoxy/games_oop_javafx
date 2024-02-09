@@ -20,23 +20,32 @@ public final class Logic {
         figures[index] = figures[index].copy(dest);
     }
 
-
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for (int index = 0; index != figures.length; index++) {
+            Figure figure = figures[index];
+            for (int i = 0; i < steps.length; i++) {
+                if (figure.position().equals(steps[i])) {
+                    throw new OccupiedCellException("Figure is occupied.");
+                }
+            }
+        }
         return true;
     }
 
-        public void clean() {
-            Arrays.fill(figures, null);
-            index = 0;
-        }
-
-        private int findBy(Cell cell) throws FigureNotFoundException {
-            for (int index = 0; index != figures.length; index++) {
-                Figure figure = figures[index];
-                if (figure != null && figure.position().equals(cell)) {
-                    return index;
-                }
-            }
-            throw new FigureNotFoundException(z);
-        }
+    public void clean() {
+        Arrays.fill(figures, null);
+        index = 0;
     }
+
+    private int findBy(Cell cell) throws FigureNotFoundException {
+        for (int index = 0; index != figures.length; index++) {
+            Figure figure = figures[index];
+            Cell f;
+            if (figure != null && figure.position().equals(cell)) {
+                f = figure.position();
+                return index;
+            }
+        }
+        throw new FigureNotFoundException("Figure not found on the board.");
+    }
+}
