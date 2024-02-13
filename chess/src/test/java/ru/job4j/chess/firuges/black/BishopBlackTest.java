@@ -24,7 +24,7 @@ class BishopBlackTest {
     @Test
     void way() {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
-        Enum cellNew[] = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
+        Cell[] cellNew = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
         assertThat(cellNew).isEqualTo(bishopBlack.way(Cell.G5));
     }
 }
